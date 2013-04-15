@@ -1,0 +1,71 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:outputText value="&lt;!DOCTYPE html&gt;" escape="false" />
+
+	<html>
+		<h:head>
+			<title>TweetCamp</title>
+
+			<link href='http://twitter.github.com/bootstrap/assets/css/bootstrap.css' rel='stylesheet' />
+			<h:outputStylesheet name="TweetCamp.css" library="css"/>
+			<link href='http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css' rel='stylesheet' />
+		</h:head>
+		
+		<h:body>
+			<h:form>
+				<div class="navbar navbar-fixed-top">
+					<div class="navbar-inner">
+						<div class="container">
+							<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+			
+							<a class="brand" href="#">TweetCamp</a>
+			
+							<div class="nav-collapse collapse">
+								<ul class="nav">
+									<li>
+										<h:link outcome="home">Home</h:link>
+									</li>
+									<li>
+										<h:link outcome="trends">Trends</h:link>
+									</li>
+									
+									<ui:fragment rendered="#{userBean.currentUser eq null}">
+										<li>
+											<h:link outcome="login">Login</h:link>
+										</li>
+										<li>
+											<h:link outcome="register">Register</h:link>
+										</li>
+									</ui:fragment>
+									
+									<ui:fragment rendered="#{userBean.currentUser ne null}">
+										<li>
+											<h:commandLink value="Logout" action="#{userBean.logout()}" />
+										</li>	
+									</ui:fragment>
+								</ul>
+								
+								<h:selectOneMenu value="#{localeHandler.locale}" onchange="submit()">
+									<f:selectItems value="#{localeHandler.supportedLocales}"/>
+									<f:valueChangeListener type="de.wombatsoftware.TweetCamp.LocaleHandler"/>
+								</h:selectOneMenu>
+							</div>
+							<!--/.nav-collapse -->
+						</div>
+					</div>
+				</div>
+			</h:form>
+		
+			<div class="container">
+				<ui:insert name="content"/>
+			</div>
+
+			<script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
+			<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
+			<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
+		</h:body>
+	</html>
+</f:view>

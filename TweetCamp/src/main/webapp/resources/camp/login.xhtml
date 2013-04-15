@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<cc:interface>
+		<cc:attribute name="bean" type="de.wombatsoftware.TweetCamp.presentation.UserHandler" required="true"/>
+		<cc:attribute name="action" method-signature="void f()"></cc:attribute>
+	</cc:interface>
+	
+	<cc:implementation>
+		<h2>Login Component</h2>
+
+			<h:form>
+				<div>
+					<label>Username: </label>
+					<h:inputText id="username" value="#{cc.attrs.bean.username}" required="true" requiredMessage="Username not given" validator="#{userValidator.validateUsername}">
+						<f:ajax event="valueChange" render="usernameMessage"/>
+					</h:inputText>
+					<h:message id="usernameMessage" for="username"/>
+		
+					<label>Password: </label>
+					<h:inputSecret id="password" value="#{cc.attrs.bean.password}" required="true" requiredMessage="Password not given" validator="#{userValidator.validatePassword}">
+						<f:ajax event="valueChange" render="passwordMessage" />
+					</h:inputSecret>
+					<h:message id="passwordMessage" for="password"/>
+					
+					<h:messages globalOnly="true"/>
+				</div>
+
+				<h:commandButton value="Login" actionListener="#{cc.attrs.bean.preLogin()}" action="#{cc.attrs.action}"/>
+			</h:form>
+	</cc:implementation>
+      
+</ui:composition>
