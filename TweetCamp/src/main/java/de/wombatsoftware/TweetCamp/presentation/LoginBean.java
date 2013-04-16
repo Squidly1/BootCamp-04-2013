@@ -11,8 +11,10 @@ import javax.inject.Inject;
 
 import de.wombatsoftware.TweetCamp.model.User;
 import de.wombatsoftware.TweetCamp.qualifier.LoggedIn;
+import de.wombatsoftware.TweetCamp.services.interceptor.binding.Performance;
 
 @Model
+@Performance
 public class LoginBean implements UserHandler {
     @Inject
     private UserBean userBean;
