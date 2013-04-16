@@ -12,9 +12,11 @@ import javax.inject.Inject;
 
 import de.wombatsoftware.TweetCamp.model.User;
 import de.wombatsoftware.TweetCamp.services.db.DBUserService;
+import de.wombatsoftware.TweetCamp.stereotype.Mock;
 
 @RequestScoped
 @Specializes
+@Mock
 public class MockUserService extends DBUserService {
     @Inject
     private Logger logger;
