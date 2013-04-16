@@ -4,7 +4,6 @@ import java.util.List;
 
 import de.wombatsoftware.TweetCamp.model.User;
 
-
 public interface UserService {
     public List<User> findAllUsers();
     public User findUserByUsername(final String username);
