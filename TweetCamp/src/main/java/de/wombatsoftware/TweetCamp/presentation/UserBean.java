@@ -12,7 +12,7 @@ import de.wombatsoftware.TweetCamp.services.api.UserService;
 import de.wombatsoftware.TweetCamp.stereotype.SessionModel;
 
 @SessionModel
-public class UserBean implements Serializable {
+public class UserBean implements Serializable, UserBeanInterface {
     private static final long serialVersionUID = 4831057330322449512L;
     
     @Inject
@@ -20,6 +20,7 @@ public class UserBean implements Serializable {
     
     private User currentUser;
     
+    @Override
     public boolean login(String username, String passwort) {
 	User user = userService.findUserByUsername(username);
 	
@@ -32,10 +33,12 @@ public class UserBean implements Serializable {
 	return false;
     }
 
+    @Override
     public void logout() {
 	currentUser = null;
     }
 
+    @Override
     @Produces
     @Named("currentUser")
     @Dependent
@@ -43,11 +46,12 @@ public class UserBean implements Serializable {
 	return currentUser;
     }
 
+    @Override
     public void setCurrentUser(User currentUser) {
 	this.currentUser = currentUser;
     }
 
-//    DECORATOR : extract check for given username
+    @Override
     public boolean register(String username, String password) {
 	userService.save(new User(username, password));
 

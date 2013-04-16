@@ -3,4 +3,8 @@
 	<interceptors>
 		<class>de.wombatsoftware.TweetCamp.services.interceptor.PerformanceInterceptor</class>
 	</interceptors>
+	<decorators>
+		<class>de.wombatsoftware.TweetCamp.decoratpr.UserBeanDecorator</class>
+		<class>de.wombatsoftware.TweetCamp.decoratpr.UserServiceDecorator</class>
+	</decorators>
 </beans>

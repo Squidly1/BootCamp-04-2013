@@ -17,7 +17,7 @@ import de.wombatsoftware.TweetCamp.services.interceptor.binding.Performance;
 @Performance
 public class LoginBean implements UserHandler {
     @Inject
-    private UserBean userBean;
+    private UserBeanInterface userBean;
     
     @Inject
     private Logger logger;

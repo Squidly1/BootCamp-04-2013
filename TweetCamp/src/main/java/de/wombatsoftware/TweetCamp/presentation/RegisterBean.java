@@ -8,7 +8,7 @@ import javax.inject.Named;
 @Named
 public class RegisterBean {
     @Inject
-    private UserBean userBean;
+    private UserBeanInterface userBean;
 
     private String username;
     private String password;

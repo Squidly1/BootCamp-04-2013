@@ -29,8 +29,7 @@ public class DBUserService implements UserService {
 
     @Override
     public void save(User user) {
-	// TODO Auto-generated method stub
-
+//	em.merge(user);
     }
     
     public void logUserEvent(@Observes User user) {
