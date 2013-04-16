@@ -6,7 +6,22 @@
 
 	<ui:composition template="WEB-INF/templates/template.xhtml">
 		<ui:define name="content">
-			<h2>#{texts.welcome}<h:outputText value=", #{currentUser.username}" rendered="#{not empty userBean.currentUser}"/></h2>
+			Current User: #{playground.user.username}
+		
+			<br/><br/>
+			#{playground.userHandler}
+			<br/>
+			All Handlers:
+			<ui:repeat var="handler" value="#{playground.userHandlers}">
+				<h:outputText value="#{handler}" />
+			</ui:repeat>
+			<br/><br/><br/>
+			
+			Circular A: #{circularA}<br/>
+			Circular A (via B): #{circularB.circularA}
+			<br/><br/>
+			Circular B: #{circularB}<br/>
+			Circular B (via A): #{circularA.circularB}	
 		</ui:define>
 	</ui:composition>
 </html>

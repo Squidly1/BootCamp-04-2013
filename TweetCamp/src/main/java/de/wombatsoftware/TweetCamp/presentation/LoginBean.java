@@ -1,37 +1,94 @@
 package de.wombatsoftware.TweetCamp.presentation;
 
-import javax.enterprise.context.RequestScoped;
+import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.event.Event;
+import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
-import de.wombatsoftware.TweetCamp.service.UserBean;
+import de.wombatsoftware.TweetCamp.model.User;
+import de.wombatsoftware.TweetCamp.qualifier.LoggedIn;
 
-@RequestScoped
-@Named
+@Model
 public class LoginBean implements UserHandler {
     @Inject
     private UserBean userBean;
+    
+    @Inject
+    private Logger logger;
+    
+    @Inject
+    @LoggedIn
+    private Event<User> loginEvent;
+    
+    public LoginBean() {}
+    
+    @PostConstruct
+    public void init() {
+	logger.info("PostConstrut method");
+    }
+    
+//    Constructor Injection
+//    @Inject
+//    public LoginBean(UserBean userBean) {
+//	this.userBean = userBean;
+//	
+//	System.out.println("Constructor Injection");
+//    }
+    
+//    Inject with several arguments
+//    @Inject
+//    public void injectAll(UserBean userBean, RegisterBean registerBean) {
+//	this.userBean = userBean;
+//	
+//	if (registerBean != null) {
+//	    System.out.println("Register not null");
+//	}
+//	
+//	System.out.println("InjectAll method");
+//    }
+    
+//    @Inject
+//    public void injectAll2(UserBean userBean, RegisterBean registerBean) {
+//	this.userBean = userBean;
+//	
+//	if (registerBean != null) {
+//	    System.out.println("Register2 not null");
+//	}
+//	
+//	System.out.println("InjectAll2 method");
+//    }
 
     private String username;
     private String password;
     
     public void preLogin() {
-	System.out.println("Prelogin");
+	logger.info("Prelogin");
     }
 
     public String login() {
-	System.out.println("Login");
 	boolean success = userBean.login(getUsername(), getPassword());
 
 	if (success) {
+	    loginEvent.fire(userBean.getCurrentUser());
+
 	    return "home";
 	}
 
 	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Credentials wrong!"));
 	return null;
     }
+
+//    Method Injection
+//    @Inject
+//    public void setUserBean(UserBean userBean) {
+//        this.userBean = userBean;
+//
+//        logger.info("Method Injection");
+//    }
 
     public String getUsername() {
 	return username;

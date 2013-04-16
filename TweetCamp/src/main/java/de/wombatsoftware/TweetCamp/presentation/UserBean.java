@@ -1,21 +1,24 @@
-package de.wombatsoftware.TweetCamp.service;
+package de.wombatsoftware.TweetCamp.presentation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
 import de.wombatsoftware.TweetCamp.model.User;
+import de.wombatsoftware.TweetCamp.stereotype.SessionModel;
 
-@SessionScoped
-@Named
+@SessionModel
 public class UserBean implements Serializable {
     private static final long serialVersionUID = 4831057330322449512L;
     
-    private User currentUser = null;
+    private User currentUser;
     private List<User> users;
     
     @PostConstruct
@@ -41,6 +44,9 @@ public class UserBean implements Serializable {
 	currentUser = null;
     }
 
+    @Produces
+    @Named("currentUser")
+    @Dependent
     public User getCurrentUser() {
 	return currentUser;
     }

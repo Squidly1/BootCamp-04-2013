@@ -4,8 +4,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import de.wombatsoftware.TweetCamp.service.UserBean;
-
 @RequestScoped
 @Named
 public class RegisterBean {
