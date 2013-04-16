@@ -7,15 +7,15 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Specializes;
 import javax.inject.Inject;
 
 import de.wombatsoftware.TweetCamp.model.User;
-import de.wombatsoftware.TweetCamp.services.api.UserService;
-import de.wombatsoftware.TweetCamp.stereotype.Mock;
+import de.wombatsoftware.TweetCamp.services.db.DBUserService;
 
 @RequestScoped
-@Mock
-public class MockUserService implements UserService {
+@Specializes
+public class MockUserService extends DBUserService {
     @Inject
     private Logger logger;
     
