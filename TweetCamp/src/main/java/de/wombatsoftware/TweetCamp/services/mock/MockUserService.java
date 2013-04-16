@@ -1,11 +1,12 @@
 package de.wombatsoftware.TweetCamp.services.mock;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Specializes;
 import javax.inject.Inject;
@@ -14,10 +15,12 @@ import de.wombatsoftware.TweetCamp.model.User;
 import de.wombatsoftware.TweetCamp.services.db.DBUserService;
 import de.wombatsoftware.TweetCamp.stereotype.Mock;
 
-@RequestScoped
+@SessionScoped
 @Specializes
 @Mock
-public class MockUserService extends DBUserService {
+public class MockUserService extends DBUserService implements Serializable {
+    private static final long serialVersionUID = 2012817739551043919L;
+
     @Inject
     private Logger logger;
     

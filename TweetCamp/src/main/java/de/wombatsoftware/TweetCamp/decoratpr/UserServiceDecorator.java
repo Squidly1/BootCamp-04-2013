@@ -1,5 +1,6 @@
 package de.wombatsoftware.TweetCamp.decoratpr;
 
+import java.io.Serializable;
 import java.util.logging.Logger;
 
 import javax.decorator.Decorator;
@@ -11,7 +12,8 @@ import de.wombatsoftware.TweetCamp.model.User;
 import de.wombatsoftware.TweetCamp.services.api.UserService;
 
 @Decorator
-public abstract class UserServiceDecorator implements UserService {
+public abstract class UserServiceDecorator implements UserService, Serializable {
+    private static final long serialVersionUID = 8218543361642417656L;
 
     @Inject
     @Delegate

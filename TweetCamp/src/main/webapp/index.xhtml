@@ -1,12 +1,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<ui:composition template="WEB-INF/templates/template.xhtml">
-		<ui:define name="content">
-			<h2>#{texts.welcome}<h:outputText value=", #{currentUser.username}" rendered="#{not empty userBean.currentUser}"/></h2>
-		</ui:define>
-	</ui:composition>
+<ui:composition template="WEB-INF/templates/template.xhtml">
+	<ui:define name="content">
+		<h2>
+			#{texts.welcome}
+			<h:outputText value=", #{currentUser.username}" rendered="#{not empty currentUser}" />
+		</h2>
+
+		<ui:fragment rendered="#{not empty currentUser}">
+			<div class="span4">
+				<h:form>
+					<h:inputTextarea value="#{tweetBean.message}" rows="4" cols="20" />
+					
+					<h:commandButton value="Tweet it" action="#{tweetBean.tweet()}" styleClass="btn"/>
+				</h:form>
+			</div>
+
+			<div class="span6">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Author</th>
+							<th>Message</th>
+							<th>Timestamp</th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat var="tweet" value="#{tweetBean.tweets}" varStatus="status">
+							<tr>
+								<td>#{status.index + 1}</td>
+								<td>#{tweet.user.username}</td>
+								<td>#{tweet.message}</td>
+								<td>#{tweet.creationTimestamp}</td>
+							</tr>
+						</ui:repeat>
+					</tbody>
+				</table>
+			</div>
+		</ui:fragment>
+	</ui:define>
+</ui:composition>
 </html>

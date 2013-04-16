@@ -15,6 +15,8 @@ import de.wombatsoftware.TweetCamp.stereotype.SessionModel;
 public class UserBean implements Serializable, UserBeanInterface {
     private static final long serialVersionUID = 4831057330322449512L;
     
+    public static final String CURRENT_USER = "currentUser";
+    
     @Inject
     private UserService userService;
     
@@ -40,7 +42,7 @@ public class UserBean implements Serializable, UserBeanInterface {
 
     @Override
     @Produces
-    @Named("currentUser")
+    @Named(CURRENT_USER)
     @Dependent
     public User getCurrentUser() {
 	return currentUser;
