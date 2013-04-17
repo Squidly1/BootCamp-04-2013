@@ -2,8 +2,10 @@ package de.wombatsoftware.TweetCamp.presentation;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,6 +18,9 @@ import de.wombatsoftware.TweetCamp.services.api.TweetService;
 public class TweetBean {
     @Inject
     private TweetService tweetService;
+    
+    @Inject
+    private Logger logger;
 
     @Inject
     @Named(UserBean.CURRENT_USER)
@@ -36,6 +41,11 @@ public class TweetBean {
     @PostConstruct
     public void init() {
 	tweets = tweetService.findAll();
+    }
+    
+    @PreDestroy
+    public void destroy() {
+	logger.info("PreDestroy im TweetBean");
     }
 
     public String tweet() {
