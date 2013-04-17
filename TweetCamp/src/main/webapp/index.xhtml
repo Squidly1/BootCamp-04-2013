@@ -5,10 +5,10 @@
 	<ui:define name="content">
 		<h2>
 			#{texts.welcome}
-			<h:outputText value=", #{currentUser.username}" rendered="#{not empty currentUser}" />
+			<h:outputText value=", #{currentUser.username}" rendered="#{not empty currentUser.id}" />
 		</h2>
 
-		<ui:fragment rendered="#{not empty currentUser}">
+		<ui:fragment rendered="#{not empty currentUser.id}">
 			<div class="span4">
 				<h:form>
 					<h:inputTextarea value="#{tweetBean.message}" rows="4" cols="20" />
@@ -33,7 +33,11 @@
 								<td>#{status.index + 1}</td>
 								<td>#{tweet.user.username}</td>
 								<td>#{tweet.message}</td>
-								<td>#{tweet.creationTimestamp}</td>
+								<td>
+									<h:outputText value="#{tweet.createTimestamp}">
+										<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss"/>
+									</h:outputText>
+								</td>
 							</tr>
 						</ui:repeat>
 					</tbody>

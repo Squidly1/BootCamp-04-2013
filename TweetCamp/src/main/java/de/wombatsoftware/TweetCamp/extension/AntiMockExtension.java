@@ -12,10 +12,10 @@ public class AntiMockExtension implements Extension {
     private Logger logger = Logger.getLogger(this.getClass().getName());
     
     <T> void processAnnotatedType(@Observes ProcessAnnotatedType<T> pat) {
-//	if(pat.getAnnotatedType().isAnnotationPresent(Mock.class)) {
-//	    pat.veto();
-//
-//	    logger.info(pat.getAnnotatedType().getJavaClass().getName() + " got deactivated because it Mocks");
-//	}
+	if(pat.getAnnotatedType().isAnnotationPresent(Mock.class)) {
+	    pat.veto();
+
+	    logger.info(pat.getAnnotatedType().getJavaClass().getName() + " got deactivated because it Mocks");
+	}
     }
 }

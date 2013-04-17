@@ -3,11 +3,13 @@ package de.wombatsoftware.TweetCamp.presentation;
 import java.io.Serializable;
 
 import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.wombatsoftware.TweetCamp.model.User;
+import de.wombatsoftware.TweetCamp.qualifier.Dummy;
 import de.wombatsoftware.TweetCamp.services.api.UserService;
 import de.wombatsoftware.TweetCamp.stereotype.SessionModel;
 
@@ -20,7 +22,7 @@ public class UserBean implements Serializable, UserBeanInterface {
     @Inject
     private UserService userService;
     
-    private User currentUser;
+    private User currentUser = new User();
     
     @Override
     public boolean login(String username, String passwort) {
@@ -43,7 +45,6 @@ public class UserBean implements Serializable, UserBeanInterface {
     @Override
     @Produces
     @Named(CURRENT_USER)
-    @Dependent
     public User getCurrentUser() {
 	return currentUser;
     }

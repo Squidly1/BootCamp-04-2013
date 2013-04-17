@@ -1,45 +1,41 @@
 package de.wombatsoftware.TweetCamp.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Tweet implements Serializable {
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Tweet extends AbstractEntity {
     private static final long serialVersionUID = -7502393298119267496L;
+
+    private String message;
     
-    public Tweet(){}
+    @ManyToOne
+    private User user;
+
+    public Tweet() {
+    }
 
     public Tweet(User user, String message, Date creationTimestamp) {
-	super();
 	this.user = user;
 	this.message = message;
-	this.creationTimestamp = creationTimestamp;
-    }
-
-    private User user;
-    private String message;
-    private Date creationTimestamp;
-
-    public User getUser() {
-	return user;
-    }
-
-    public void setUser(User user) {
-	this.user = user;
+	setCreateTimestamp(creationTimestamp);
     }
 
     public String getMessage() {
 	return message;
     }
 
+    public User getUser() {
+	return user;
+    }
+
     public void setMessage(String message) {
 	this.message = message;
     }
 
-    public Date getCreationTimestamp() {
-	return creationTimestamp;
-    }
-
-    public void setCreationTimestamp(Date creationTimestamp) {
-	this.creationTimestamp = creationTimestamp;
+    public void setUser(User user) {
+	this.user = user;
     }
 }

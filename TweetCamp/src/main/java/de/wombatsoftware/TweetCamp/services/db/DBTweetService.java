@@ -2,21 +2,21 @@ package de.wombatsoftware.TweetCamp.services.db;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+
 import de.wombatsoftware.TweetCamp.model.Tweet;
 import de.wombatsoftware.TweetCamp.services.api.TweetService;
 
-public class DBTweetService implements TweetService {
+@Stateless
+public class DBTweetService extends AbstractService implements TweetService {
 
     @Override
     public List<Tweet> findAll() {
-	// TODO Auto-generated method stub
-	return null;
+	return em.createQuery("FROM Tweet", Tweet.class).getResultList();
     }
 
     @Override
     public void save(Tweet t) {
-	// TODO Auto-generated method stub
-	
+	saveEntity(t);
     }
-
 }

@@ -8,12 +8,14 @@ import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import de.wombatsoftware.TweetCamp.model.User;
 import de.wombatsoftware.TweetCamp.qualifier.LoggedIn;
 import de.wombatsoftware.TweetCamp.services.interceptor.binding.Performance;
 
 @Model
+@Named
 @Performance
 public class LoginBean implements UserHandler {
     @Inject
@@ -35,7 +37,7 @@ public class LoginBean implements UserHandler {
     
 //    Constructor Injection
 //    @Inject
-//    public LoginBean(UserBean userBean) {
+//    public LoginBean(UserBeanInterface userBean) {
 //	this.userBean = userBean;
 //	
 //	System.out.println("Constructor Injection");
@@ -43,7 +45,7 @@ public class LoginBean implements UserHandler {
     
 //    Inject with several arguments
 //    @Inject
-//    public void injectAll(UserBean userBean, RegisterBean registerBean) {
+//    public void injectAll(UserBeanInterface userBean, RegisterBean registerBean) {
 //	this.userBean = userBean;
 //	
 //	if (registerBean != null) {
@@ -86,7 +88,7 @@ public class LoginBean implements UserHandler {
 
 //    Method Injection
 //    @Inject
-//    public void setUserBean(UserBean userBean) {
+//    public void setUserBean(UserBeanInterface userBean) {
 //        this.userBean = userBean;
 //
 //        logger.info("Method Injection");

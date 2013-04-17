@@ -32,7 +32,7 @@
 										<h:link outcome="trends">Trends</h:link>
 									</li>
 									
-									<ui:fragment rendered="#{userBean.currentUser eq null}">
+									<ui:fragment rendered="#{userBean.currentUser.id eq null}">
 										<li>
 											<h:link outcome="login">Login</h:link>
 										</li>
@@ -41,7 +41,7 @@
 										</li>
 									</ui:fragment>
 									
-									<ui:fragment rendered="#{userBean.currentUser ne null}">
+									<ui:fragment rendered="#{userBean.currentUser.id ne null}">
 										<li>
 											<h:commandLink value="Logout" action="#{userBean.logout()}" />
 										</li>	

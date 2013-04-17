@@ -40,6 +40,10 @@ public class TweetBean {
 
     public String tweet() {
 	tweetService.save(new Tweet(currentUser, message, new Date()));
+
+	init();
+	message = null;
+
 	return null;
     }
 

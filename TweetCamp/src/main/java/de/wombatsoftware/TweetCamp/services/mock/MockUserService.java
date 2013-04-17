@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.ejb.Stateful;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Specializes;
 import javax.inject.Inject;
@@ -15,7 +15,7 @@ import de.wombatsoftware.TweetCamp.model.User;
 import de.wombatsoftware.TweetCamp.services.db.DBUserService;
 import de.wombatsoftware.TweetCamp.stereotype.Mock;
 
-@SessionScoped
+@Stateful
 @Specializes
 @Mock
 public class MockUserService extends DBUserService implements Serializable {
