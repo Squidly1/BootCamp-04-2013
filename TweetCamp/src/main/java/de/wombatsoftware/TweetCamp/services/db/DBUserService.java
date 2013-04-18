@@ -13,8 +13,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.omg.PortableInterceptor.USER_EXCEPTION;
-
 import de.wombatsoftware.TweetCamp.model.User;
 import de.wombatsoftware.TweetCamp.model.User_;
 import de.wombatsoftware.TweetCamp.services.api.UserService;
