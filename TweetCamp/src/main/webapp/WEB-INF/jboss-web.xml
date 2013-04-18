@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web xmlns="http://www.jboss.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee http://www.jboss.org/j2ee/schema/jboss-web_5_1.xsd">
+
+	<context-root>/</context-root>
+	<virtual-host>BootCamp</virtual-host>
+</jboss-web>
+
+<!--
+	Wichtig: Add "TweetCamp" to the Hosts file
+	standalone.xml
+	
+	<subsystem xmlns="urn:jboss:domain:web:1.1" default-virtual-server="BootCamp" native="false">
+            <connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http"/>
+            <virtual-server name="BootCamp">
+                <alias name="TweetCamp"/>
+                <alias name="www.tweetcamp.com"/>
+            </virtual-server>
+        </subsystem> 
+ -->
