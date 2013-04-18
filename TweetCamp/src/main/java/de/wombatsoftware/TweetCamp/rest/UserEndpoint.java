@@ -20,61 +20,54 @@ import javax.ws.rs.core.UriBuilder;
 import de.wombatsoftware.TweetCamp.model.User;
 
 @Stateless
-@Path("/users")
-public class UserEndpoint
-{
-   @PersistenceContext
-   private EntityManager em;
+@Path("/users/")
+public class UserEndpoint {
+    @PersistenceContext
+    private EntityManager em;
 
-   @POST
-   @Consumes("application/json")
-   public Response create(User entity)
-   {
-      em.persist(entity);
-      return Response.created(UriBuilder.fromResource(UserEndpoint.class).path(String.valueOf(entity.getId())).build()).build();
-   }
+    @POST
+    @Consumes("application/json")
+    public Response create(User entity) {
+	em.persist(entity);
+	return Response.created(UriBuilder.fromResource(UserEndpoint.class).path(String.valueOf(entity.getId())).build()).build();
+    }
 
-   @DELETE
-   @Path("/{id:[0-9][0-9]*}")
-   public Response deleteById(@PathParam("id") Long id)
-   {
-      User entity = em.find(User.class, id);
-      if (entity == null)
-      {
-         return Response.status(Status.NOT_FOUND).build();
-      }
-      em.remove(entity);
-      return Response.noContent().build();
-   }
+    @DELETE
+    @Path("/{id:[0-9][0-9]*}")
+    public Response deleteById(@PathParam("id") Long id) {
+	User entity = em.find(User.class, id);
+	if (entity == null) {
+	    return Response.status(Status.NOT_FOUND).build();
+	}
+	em.remove(entity);
+	return Response.noContent().build();
+    }
 
-   @GET
-   @Path("/{id:[0-9][0-9]*}")
-   @Produces("application/json")
-   public Response findById(@PathParam("id") Long id)
-   {
-      User entity = em.find(User.class, id);
-      if (entity == null)
-      {
-         return Response.status(Status.NOT_FOUND).build();
-      }
-      return Response.ok(entity).build();
-   }
+//  Sample curl command: curl -H "Accept: application/xml" -H "Content-Type: application/xml" -X GET "http://localhost:8080/TweetCamp/rest/users/1"
+    @GET
+    @Path("/{id:[0-9][0-9]*}")
+    @Produces({"application/json", "application/xml", "application/plain"})
+    public Response findById(@PathParam("id") Long id) {
+	User entity = em.find(User.class, id);
+	if (entity == null) {
+	    return Response.status(Status.ACCEPTED).build();
+	}
+	return Response.ok(entity).build();
+    }
 
-   @GET
-   @Produces("application/json")
-   public List<User> listAll()
-   {
-      final List<User> results = em.createQuery("FROM User", User.class).getResultList();
-      return results;
-   }
+    @GET
+    @Produces({"application/json", "application/xml", "application/plain"})
+    public List<User> listAll() {
+	final List<User> results = em.createQuery("FROM User", User.class).getResultList();
+	return results;
+    }
 
-   @PUT
-   @Path("/{id:[0-9][0-9]*}")
-   @Consumes("application/json")
-   public Response update(@PathParam("id") Long id, User entity)
-   {
-      entity.setId(id);
-      entity = em.merge(entity);
-      return Response.noContent().build();
-   }
+    @PUT
+    @Path("/{id:[0-9][0-9]*}")
+    @Consumes("application/json")
+    public Response update(@PathParam("id") Long id, User entity) {
+	entity.setId(id);
+	entity = em.merge(entity);
+	return Response.noContent().build();
+    }
 }

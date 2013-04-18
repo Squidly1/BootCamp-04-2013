@@ -13,6 +13,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
@@ -56,9 +57,13 @@ public class TweetEndpoint {
 
     @GET
     @Produces("application/json")
-    public List<Tweet> listAll() {
+    public Response listAll(@QueryParam("token") String token) {
+	if(!"BootCamp".equals(token)) {
+	    return Response.status(Status.FORBIDDEN).build();
+	}
+
 	final List<Tweet> results = em.createQuery("FROM Tweet", Tweet.class).getResultList();
-	return results;
+	return Response.ok(results).build();
     }
 
     @PUT

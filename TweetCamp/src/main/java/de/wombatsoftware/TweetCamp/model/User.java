@@ -3,12 +3,15 @@ package de.wombatsoftware.TweetCamp.model;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @NamedQueries({
     @NamedQuery(name = User.findAll, query="SELECT u FROM User u"),
     @NamedQuery(name = User.findUserByUsername, query="SELECT u FROM User u WHERE u.username = :username")
 })
+@XmlRootElement
 public class User extends AbstractEntity {
     private static final long serialVersionUID = -7502393298119267496L;
     
@@ -26,6 +29,7 @@ public class User extends AbstractEntity {
 	this.password = password;
     }
 
+    @XmlTransient
     public String getPassword() {
 	return password;
     }
